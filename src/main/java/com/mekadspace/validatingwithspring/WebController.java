@@ -21,16 +21,18 @@ public class WebController implements WebMvcConfigurer{
 		return "form";
 	}
 
-	@GetMapping("/test")
-	public String Test() {
-		return "results";
-	}
-	
 	@PostMapping("/")
-	public String checkPersonInfo(@Valid PersonForm personform, BindingResult bindingResult) {
+	public String checkPersonInfo(@Valid PersonForm personForm, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "form";
 		}
+		System.out.println("Name: " + personForm.getName());
+		System.out.println("Age: " + personForm.getAge());
+		personForm.setName("Gemini");
+		personForm.setAge(30);
+		System.out.println("Name: " + personForm.getName());
+		System.out.println("Age: " + personForm.getAge());
+		System.out.println("To String: " + personForm.toString());
 		return "redirect:/results";
 	}
 }
